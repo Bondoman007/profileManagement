@@ -1,12 +1,27 @@
-# React + Vite
+# 🗺️ Profile Locator Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![React](https://img.shields.io/badge/React-18.2.0-blue)
+![Redux](https://img.shields.io/badge/Redux-4.2.0-purple)
+![Google Maps API](https://img.shields.io/badge/Google_Maps_API-v3.0-lightgrey)
 
-Currently, two official plugins are available:
+A modern web application for managing user profiles with integrated map location functionality.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
+- **Profile Management**: Create, view, edit, and delete profiles
+- **Interactive Maps**: Locate profiles using Google Maps integration
+- **Beautiful UI**: Glass-morphism design with Tailwind CSS
+- **Responsive**: Works on all device sizes
+- **State Management**: Redux for centralized state
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/profile-locator.git
+   cd profile-locator
+   npm install
+   npm run dev
+
+###Deploy link 
+- https://profile-management-nine.vercel.app/
