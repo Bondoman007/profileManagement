@@ -2,20 +2,25 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ProfileCard from "./ProfileCard";
 import ProfileForm from "./ProfileForm";
+import ProfileModal from "./ProfileModal";
 import { addProfile, updateProfile } from "../redux/actions/profileActions";
+import { useNavigate } from "react-router-dom";
 
 const ProfileList = () => {
   const profiles = useSelector((state) => state.profiles.profiles);
   const dispatch = useDispatch();
   const [showForm, setShowForm] = useState(false);
   const [editingProfile, setEditingProfile] = useState(null);
-
+  const [selectedProfile, setSelectedProfile] = useState(null);
+  const navigate = useNavigate();
   const handleAddProfile = () => {
-    setEditingProfile(null);
     setShowForm(true);
+    setEditingProfile(null);
   };
 
   const handleEditProfile = (profile) => {
+    navigate("/");
+    setSelectedProfile(null); // Close modal if open
     setEditingProfile(profile);
     setShowForm(true);
   };
@@ -40,6 +45,14 @@ const ProfileList = () => {
     setShowForm(false);
   };
 
+  const handleLocateProfile = (profile) => {
+    // Implement your locate functionality here
+    console.log("Locating profile:", profile);
+    // This could center a map on the profile's coordinates
+    // Or show the profile location in some other way
+    navigate(`/map/${profile.id}`);
+  };
+
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl flex justify-center flex-col">
       {/* Header with animated gradient border */}
@@ -52,6 +65,7 @@ const ProfileList = () => {
           <button
             onClick={handleAddProfile}
             className="px-6 py-3 bg-gradient-to-r from-green-500 to-teal-500 text-white rounded-xl hover:from-green-600 hover:to-teal-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0 font-medium relative overflow-hidden group"
+            aria-label="Add new profile"
           >
             <span className="relative z-10 flex items-center">
               Add New Profile
@@ -75,9 +89,9 @@ const ProfileList = () => {
         </div>
       </div>
 
-      {/* Form Section with smooth entrance animation */}
+      {/* Form Section */}
       {showForm && (
-        <div className="mb-10 animate-fade-in-up">
+        <div>
           <ProfileForm
             profile={editingProfile}
             onSubmit={handleSubmit}
@@ -91,15 +105,16 @@ const ProfileList = () => {
         <div className="flex flex-col my-6 w-full justify-center">
           {profiles.map((profile) => (
             <div
-              key={profile.id}
-              className=" hover:-translate-y-2 hover:shadow-xl my-2"
+              key={`profile-${profile.id}`}
+              className="hover:-translate-y-2 hover:shadow-xl my-2 transition-transform duration-300 cursor-pointer"
+              onClick={() => setSelectedProfile(profile)}
             >
               <ProfileCard profile={profile} onEdit={handleEditProfile} />
             </div>
           ))}
         </div>
       ) : (
-        // Empty State with animation
+        // Empty State
         <div className="text-center py-16 animate-pulse-slow">
           <div className="mx-auto h-48 w-48 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center mb-6">
             <svg
@@ -108,6 +123,7 @@ const ProfileList = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -126,10 +142,21 @@ const ProfileList = () => {
           <button
             onClick={handleAddProfile}
             className="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-md"
+            aria-label="Create first profile"
           >
             Create Profile
           </button>
         </div>
+      )}
+
+      {/* Profile Modal */}
+      {selectedProfile && (
+        <ProfileModal
+          profile={selectedProfile}
+          onClose={() => setSelectedProfile(null)}
+          onEdit={() => handleEditProfile(selectedProfile)}
+          onLocate={() => handleLocateProfile(selectedProfile)}
+        />
       )}
     </div>
   );
