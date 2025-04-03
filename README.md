@@ -18,7 +18,7 @@ A modern web application for managing user profiles with integrated map location
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/profileManagement.git
+   git clone https://github.com/Bondoman007/profileManagement.git
    cd profileManagement
    npm install
    npm run dev
