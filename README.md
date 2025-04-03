@@ -18,8 +18,8 @@ A modern web application for managing user profiles with integrated map location
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/profile-locator.git
-   cd profile-locator
+   git clone https://github.com/yourusername/profileManagement.git
+   cd profileManagement
    npm install
    npm run dev
 
